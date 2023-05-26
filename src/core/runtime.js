@@ -42,7 +42,9 @@ export function patch(n1, n2) {
       const oldVal = oldProps[key]
       const newVal = newProps[key]
       if (newVal !== oldVal) {
-        el.setAttribute(key, newVal)
+        if (!key.startsWith('on')) {
+          el.setAttribute(key, newVal)
+        }
       }
     }
     for (const key in oldProps) {
@@ -70,7 +72,7 @@ export function patch(n1, n2) {
         })
       } else {
         const min = Math.min(oldChildren.length, newChildren.length)
-        for (let i = 0; i < min.length; i++) {
+        for (let i = 0; i < min; i++) {
           patch(oldChildren[i], newChildren[i])
         }
         if (newChildren.length > oldChildren.length) {

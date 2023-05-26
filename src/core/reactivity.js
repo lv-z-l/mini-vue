@@ -42,3 +42,7 @@ const reactiveHandles = {
 export default function reactive(obj) {
   return new Proxy(obj, reactiveHandles)
 }
+
+export function ref(value) {
+  return reactive({ value })
+}
